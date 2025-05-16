@@ -14,21 +14,26 @@ import javax.servlet.http.HttpServletResponse;
 public class contact_servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// simply forward to POST logic
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		System.out.println("servlet triggers");// for debug
-		
-		try
-		{
+
+		try {
 			List<contact> contact_s = contact_DAO.getContactDetails();
 			request.setAttribute("contact_details", contact_s);
-		}
-		catch(Exception ex) 
-		{
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-		RequestDispatcher disp =request.getRequestDispatcher("view_contact.jsp");
+
+		RequestDispatcher disp = request.getRequestDispatcher("/view_contact.jsp");
 		disp.forward(request, response);
 	}
 

@@ -8,10 +8,21 @@
 		<!-- Google Font -->
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/contact.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 
 	<body>
+		<!-- 1) NAVIGATION BAR -->
+		<nav>
+			<div class="nav-container">
+				<div class="logo">Help Desk</div>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/contact.jsp">New Contact</a></li>
+					<li><a href="${pageContext.request.contextPath}/view_contact.jsp">View Contacts</a></li>
+				</ul>
+			</div>
+		</nav>
 		<main class="container">
 			<section class="card">
 				<h1>Contact Us</h1>

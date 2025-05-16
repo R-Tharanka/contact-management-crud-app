@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact_form");
 
     // contact-validation.js
-    console.log("🚀 Validation script loaded!");
+    console.log("Validation script loaded!");
 
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("✅ DOMContentLoaded fired, starting validation setup");
+        console.log("DOMContentLoaded fired, starting validation setup");
         // ...rest of your code
     });
 

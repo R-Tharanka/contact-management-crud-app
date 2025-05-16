@@ -29,6 +29,7 @@
             box-sizing: border-box;
         }
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
 </head>
 <body>
 

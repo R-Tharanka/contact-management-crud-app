@@ -57,7 +57,4 @@ public class contact {
 	public String getMessage() {
 		return Message;
 	}
-	
-	
-	
 }
