@@ -1,20 +1,103 @@
 @charset "UTF-8";
 
-body
-{
-	margin: 0;
-	padding: 0;
+/* 1. Base styles & reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-#form_div
-{
-	display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
 }
 
-#contact_form
-{
-	
+/* 2. Card wrapper */
+.card {
+  background: #fff;
+  max-width: 480px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.card h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* 3. Form groups */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+}
+.form-group select {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="5"><path fill="%23777" d="M0 0l4 5 4-5z"/></svg>') no-repeat right 1rem center;
+  background-size: 8px 5px;
+}
+
+/* 4. Button */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4a90e2;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: #3d7ac8;
+}
+
+/* 5. Feedback & error */
+.feedback {
+  margin-top: 1rem;
+  text-align: center;
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* 6. Responsive tweaks */
+@media (max-width: 500px) {
+  .card {
+    padding: 1.5rem;
+  }
+  .card h1 {
+    font-size: 1.5rem;
+  }
 }
