@@ -1,6 +1,6 @@
 # Help Desk - Contact Management System
 
-A Java web application for managing customer support requests and inquiries with a user-friendly interface.
+_A Java web application for managing customer support requests and inquiries with a user-friendly interface._
 
 ## Overview
 
