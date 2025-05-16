@@ -11,13 +11,15 @@ body {
   background: #f5f7fa;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 1rem;
+  padding: 3rem 1rem;
+  animation: fadeIn 0.6s ease-in-out both;
 }
 
 /* 2. Card wrapper */
@@ -28,6 +30,10 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.6s ease-out forwards;
+  animation-delay: 0.2s;
 }
 .card h1 {
   font-size: 1.75rem;
@@ -52,7 +58,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .form-group input:focus,
 .form-group select:focus,
@@ -60,6 +66,7 @@ body {
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+  animation: pulse 0.3s ease-in-out;
 }
 .form-group select {
   appearance: none;
@@ -78,10 +85,11 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
 .btn-primary:hover {
   background-color: #3d7ac8;
+  transform: scale(1.02);
 }
 
 /* 5. Feedback & error */
@@ -99,5 +107,35 @@ body {
   }
   .card h1 {
     font-size: 1.5rem;
+  }
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74,144,226,0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
   }
 }
