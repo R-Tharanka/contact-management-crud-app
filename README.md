@@ -60,7 +60,7 @@ help_desk/
    ```sql
     CREATE DATABASE support_desk;
     USE support_desk;
-```
+    ```
 2. Use the following SQL script to create the required table:
 
 ```sql
