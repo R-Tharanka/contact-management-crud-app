@@ -57,18 +57,24 @@ help_desk/
 ## Database Setup
 
 1. Create a MySQL database named `support_desk`
+   ```sql
+    CREATE DATABASE support_desk;
+    USE support_desk;
+```
 2. Use the following SQL script to create the required table:
 
 ```sql
-CREATE TABLE contact (
-    id INT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    contact_no VARCHAR(20) NOT NULL,
-    request_type VARCHAR(50) NOT NULL,
-    subject VARCHAR(200) NOT NULL,
-    Message TEXT NOT NULL
-);
+    CREATE TABLE `contact` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `contact_no` VARCHAR(20) NOT NULL,
+    `request_type` VARCHAR(50) NOT NULL,
+    `subject` VARCHAR(200) NOT NULL,
+    `message` TEXT NOT NULL,
+    PRIMARY KEY (`id`)
+    );
+
 ```
 
 ## Configuration
