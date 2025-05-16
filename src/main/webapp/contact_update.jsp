@@ -1,75 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix= "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Contact Details</title>
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-    input[type="text"] {
-            border: none;
-            background: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-</style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
+  <meta charset="UTF-8">
+  <title>Update Contact</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact-update.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+  <!-- Nav Bar -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">Help Desk</div>
+      <ul>
+        <li><a href="contact.jsp">New Contact</a></li>
+        <li>
+          <form action="contact_servlet" method="POST" style="display:inline">
+            <button type="submit" class="nav-button">View Contacts</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<h2>Update Contact Details</h2>
+  <main class="update-container">
+    <section class="update-card">
+      <h1>Update Contact</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Contact ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact No</th>
-            <th>Request Type</th>
-            <th>Subject</th>
-            <th>Message</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    <form action="contact_update" method="POST" id="up_page_form" >
+      <form id="updateForm" action="contact_update" method="POST" novalidate>
         <c:forEach items="${update_value}" var="contact">
-            <tr>
-                <td><input type="text" name="" id="id" value="${contact.c_f_id}" disabled>
-                	<input type="hidden" name="c_f_id" id="id" value="${contact.c_f_id}" >
-                </td>
-                <td><input type="text" name="name" id="name" value="${contact.name}" ></td>
-                <td><input type="text" name="email" id="email" value="${contact.email}"></td>
-                <td><input type="text" name="contact_no" id="contact_no" value="${contact.contact_no}"></td>
-                <td><input type="text" name="request_type" id="request_type" value="${contact.request_type}"></td>
-                <td><input type="text" name="subject" id="subject" value="${contact.subject}"></td>
-                <td><input type="text" name="message" id="message" value="${contact.message}"></td> <!-- Corrected here -->
-                <td>
-                    <button type="submit">Update</button>
-                </td>
-            </tr>
+          <!-- Hidden ID -->
+          <input type="hidden" name="c_f_id" value="${contact.c_f_id}">
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" required type="text" value="${contact.name}">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" required type="email" value="${contact.email}">
+          </div>
+
+          <div class="form-group">
+            <label for="contact_no">Contact No.</label>
+            <input id="contact_no" name="contact_no" required type="tel" value="${contact.contact_no}">
+          </div>
+
+          <div class="form-group">
+            <label for="request_type">Request Type</label>
+            <select id="request_type" name="request_type" required>
+              <option value="document"   ${contact.request_type == 'document' ? 'selected' : ''}>Official Document</option>
+              <option value="registration"${contact.request_type == 'registration' ? 'selected' : ''}>Registration Question</option>
+              <option value="examination"${contact.request_type == 'examination' ? 'selected' : ''}>Examination Question</option>
+              <option value="other"      ${contact.request_type == 'other' ? 'selected' : ''}>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" required type="text" value="${contact.subject}">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required rows="4">${contact.message}</textarea>
+          </div>
         </c:forEach>
-    </form>
-    </tbody>
-</table>
-<p>${failedMsg}</p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Save Changes</button>
+          <a href="contact_servlet" class="btn-secondary">Cancel</a>
+        </div>
+      </form>
+
+      <p class="feedback">${failedMsg}</p>
+    </section>
+  </main>
 
 </body>
 </html>
