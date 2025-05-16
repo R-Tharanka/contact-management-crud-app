@@ -1,15 +1,16 @@
+// contact-validation.js
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact_form");
+    // Look for either the new-contact form or the update form
+    const form = document.getElementById("contact_form")
+        || document.getElementById("updateForm");
 
-    // contact-validation.js
-    console.log("Validation script loaded!");
+    if (!form) {
+        console.warn("No form found for validation");
+        return;
+    }
+    console.log("Validation script loaded for form:", form.id);
 
-    document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOMContentLoaded fired, starting validation setup");
-        // ...rest of your code
-    });
-
-
+    // Define your validators
     const validators = {
         name: value => /^[A-Za-z\s]{2,}$/.test(value.trim()) || "Please enter a valid name (letters only).",
         email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Please enter a valid email.",
@@ -19,29 +20,28 @@ document.addEventListener("DOMContentLoaded", () => {
         message: value => value.trim().length > 0 || "Message cannot be empty."
     };
 
-    const showError = (input, message) => {
+    // Show / clear inline errors
+    const showError = (input, msg) => {
         input.classList.add("invalid");
-        let error = input.nextElementSibling;
-        if (!error || !error.classList.contains("error")) {
-            error = document.createElement("div");
-            error.className = "error";
-            input.parentNode.appendChild(error);
+        let e = input.parentNode.querySelector(".error");
+        if (!e) {
+            e = document.createElement("div");
+            e.className = "error";
+            input.parentNode.appendChild(e);
         }
-        error.textContent = message;
+        e.textContent = msg;
     };
-
     const clearError = input => {
         input.classList.remove("invalid");
-        const error = input.parentNode.querySelector(".error");
-        if (error) error.remove();
+        const e = input.parentNode.querySelector(".error");
+        if (e) e.remove();
     };
 
+    // Validate a single field
     const validateField = input => {
-        const name = input.name;
-        const value = input.value;
-        const validate = validators[name];
-        if (!validate) return true; // skip if no validator
-        const result = validate(value);
+        const rule = validators[input.name];
+        if (!rule) return true;
+        const result = rule(input.value);
         if (result !== true) {
             showError(input, result);
             return false;
@@ -51,21 +51,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Real-time validation
+    // Attach real-time validation
     Object.keys(validators).forEach(fieldName => {
-        const field = form.elements[fieldName];
-        field.addEventListener("input", () => validateField(field));
-        field.addEventListener("blur", () => validateField(field));
+        const fld = form.elements[fieldName];
+        if (!fld) return;
+        fld.addEventListener("input", () => validateField(fld));
+        fld.addEventListener("blur", () => validateField(fld));
     });
 
+    // Prevent submission if any field invalid
     form.addEventListener("submit", e => {
-        let isValid = true;
-        Object.keys(validators).forEach(fieldName => {
-            const field = form.elements[fieldName];
-            if (!validateField(field)) isValid = false;
+        let ok = true;
+        Object.keys(validators).forEach(name => {
+            const fld = form.elements[name];
+            if (fld && !validateField(fld)) ok = false;
         });
-        if (!isValid) {
-            e.preventDefault();
-        }
+        if (!ok) e.preventDefault();
     });
 });
