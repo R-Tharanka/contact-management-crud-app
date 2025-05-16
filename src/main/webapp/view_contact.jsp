@@ -33,8 +33,8 @@
                 <div class="nav-container">
                     <div class="logo">Help Desk</div>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/contact.jsp">New Contact</a></li>
-                        <li><a href="${pageContext.request.contextPath}/view_contact.jsp">View Contacts</a></li>
+                        <li><a href="/contact.jsp">New Contact</a></li>
+                        <li><a href="/view_contact.jsp">View Contacts</a></li>
                     </ul>
                 </div>
             </nav>
