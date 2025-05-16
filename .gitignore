@@ -22,7 +22,8 @@ hs_err_pid*
 target/
 build/
 
-# Eclipse/IntelliJ/NetBeans project files
+# Eclipse/IntelliJ/NetBeans/vscode project files
+.vscode/
 .classpath
 .project
 .settings/
