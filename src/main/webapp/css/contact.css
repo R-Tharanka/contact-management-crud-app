@@ -171,44 +171,92 @@ textarea.invalid {
 
 /* /////////////////////////////////////////////// */
 
+/* ===== NAVIGATION BAR ===== */
 
-/* navigation styles */
+/* 1. Sticky at top with shadow */
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: #4a90e2;
-  color: #fff;
-  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
+
+/* 2. Container to center content & add gutters */
 nav .nav-container {
   max-width: 960px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.75rem 1rem;
 }
+
+/* 3. Logo styling */
 nav .logo {
+  color: #fff;
   font-size: 1.25rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
+
+/* 4. Nav list – horizontal layout */
 nav ul {
-  list-style: none;
   display: flex;
   gap: 1rem;
 }
-nav a {
+
+/* 5. Link & button unified styling */
+nav ul a,
+nav ul form .nav-button {
+  display: inline-block;
   color: #fff;
   text-decoration: none;
-  padding: 0.5rem;
-  transition: background 0.2s;
-}
-nav a:hover {
-  background: rgba(255,255,255,0.2);
+  background: none;
+  border: none;
+  font: inherit;
+  padding: 0.5rem 0.75rem;
   border-radius: 4px;
+  transition: background 0.2s, transform 0.1s;
 }
 
-/* push page content below nav */
-body {
-  margin: 0;
+/* 6. Hover/active/focus states */
+nav ul a:hover,
+nav ul form .nav-button:hover {
+  background: rgba(255,255,255,0.2);
 }
-main {
-  padding: 1rem;
+nav ul a:focus,
+nav ul form .nav-button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+nav ul a:active,
+nav ul form .nav-button:active {
+  transform: scale(0.98);
+}
+
+/* 7. Ensure list items center contents */
+nav ul li {
+  display: flex;
+  align-items: center;
+}
+
+/* 8. Push page content below the fixed nav */
+main, .container {
+  margin-top: 4rem; /* adjust if nav height changes */
+}
+
+/* 9. Responsive tweak: stacking on narrow screens */
+@media (max-width: 600px) {
+  nav .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav ul {
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 0.5rem;
+  }
 }

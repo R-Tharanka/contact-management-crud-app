@@ -19,7 +19,11 @@
 				<div class="logo">Help Desk</div>
 				<ul>
 					<li><a href="contact.jsp">New Contact</a></li>
-					<li><a href="contact_servlet">View Contacts</a></li>
+					<li>
+						<form action="contact_servlet" method="POST" style="display:inline">
+							<button type="submit" class="nav-button">View Contacts</button>
+						</form>
+					</li>
 				</ul>
 			</div>
 		</nav>
