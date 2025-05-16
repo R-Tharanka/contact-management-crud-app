@@ -1,34 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
 
         <head>
             <meta charset="UTF-8">
-            <title>Contact Details</title>
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-
-                table,
-                th,
-                td {
-                    border: 1px solid black;
-                    padding: 8px;
-                }
-
-                th {
-                    background-color: #f2f2f2;
-                }
-            </style>
+            <title>View Contacts</title>
             <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/css/view-contact.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
 
         <body>
 
-            <!-- 1) NAVIGATION BAR -->
+            <!-- NAVIGATION BAR -->
             <nav>
                 <div class="nav-container">
                     <div class="logo">Help Desk</div>
@@ -43,48 +28,55 @@
                 </div>
             </nav>
 
-            <h2>Contact Details</h2>
+            <main class="contacts-container">
+                <h1>Contact Records</h1>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Contact ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact No</th>
-                        <th>Request Type</th>
-                        <th>Subject</th>
-                        <th>Message</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${contact_details}" var="contact">
-                        <tr>
-                            <td>${contact.c_f_id}</td>
-                            <td>${contact.name}</td>
-                            <td>${contact.email}</td>
-                            <td>${contact.contact_no}</td>
-                            <td>${contact.request_type}</td>
-                            <td>${contact.subject}</td>
-                            <td>${contact.message}</td> <!-- Corrected here -->
-                            <td>
-                                <form action="contact_update_view" method="POST">
-                                    <input type="hidden" name="id" value="${contact.c_f_id}">
-                                    <button type="submit">Update</button>
-                                </form>
-                                <form action="contact_delete" method="POST">
-                                    <input type="hidden" name="id" value="${contact.c_f_id}">
-                                    <button type="submit">Delete</button>
-                                </form>
+                <c:if test="${empty contact_details}">
+                    <p class="feedback">No contact records available.</p>
+                </c:if>
 
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <p>${failedMsg}</p>
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Type</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${contact_details}" var="contact">
+                                <tr>
+                                    <td>${contact.c_f_id}</td>
+                                    <td>${contact.name}</td>
+                                    <td>${contact.email}</td>
+                                    <td>${contact.contact_no}</td>
+                                    <td>${contact.request_type}</td>
+                                    <td>${contact.subject}</td>
+                                    <td>${contact.message}</td>
+                                    <td class="actions">
+                                        <form action="contact_update_view" method="POST" style="display:inline;">
+                                            <input type="hidden" name="id" value="${contact.c_f_id}">
+                                            <button type="submit" class="btn-update">Update</button>
+                                        </form>
+                                        <form action="contact_delete" method="POST" style="display:inline;">
+                                            <input type="hidden" name="id" value="${contact.c_f_id}">
+                                            <button type="submit" class="btn-delete">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
 
+                <p class="feedback">${failedMsg}</p>
+            </main>
         </body>
 
         </html>
