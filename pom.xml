@@ -41,7 +41,7 @@
   </dependencies>
 
   <build>
-    <finalName>help-desk</finalName>
+    <finalName>help_desk</finalName>
   </build>
 
 </project>
